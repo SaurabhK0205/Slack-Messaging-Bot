@@ -24,7 +24,7 @@ async function sendMessage(text) {
   });
 
   if (!res.data.ok) {
-    console.error("❌ Send Message Error:", res.data.error);
+    console.error("Send Message Error:", res.data.error);
     return;
   }
 
