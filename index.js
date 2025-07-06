@@ -99,7 +99,7 @@ function showMenu() {
         rl.close();
         break;
       default:
-        console.log("❌ Invalid option. Try again.");
+        console.log("Invalid option. Try again.");
         showMenu();
         break;
     }
