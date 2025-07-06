@@ -12,7 +12,7 @@ const rl = readline.createInterface({
 
 
 //to send a message
-async function sendMessage(text) {
+async function SMessage(text) {
   const res = await axios.post("https://slack.com/api/chat.postMessage", {
     channel: channelId,
     text: text,
@@ -32,7 +32,7 @@ async function sendMessage(text) {
 }
 
 //to schdeule a message
-async function scheduleMessage(text, delayInSeconds = 60) {
+async function SchMessage(text, delayInSeconds = 60) {
   const futureTime = Math.floor(Date.now() / 1000) + delayInSeconds;
 
   const res = await axios.post("https://slack.com/api/chat.scheduleMessage", {
@@ -51,7 +51,7 @@ async function scheduleMessage(text, delayInSeconds = 60) {
 }
 
 //to retrieve any recent messages from the channel
-async function getMessages() {
+async function RMessages() {
   const res = await axios.get("https://slack.com/api/conversations.history", {
     params: { channel: channelId },
     headers: {
@@ -74,24 +74,24 @@ async function getMessages() {
 
 // bot main menu
 function showMenu() {
-  rl.question("Choose: (send message/schedule message/get messages/exit): ", async (choice) => {
+  rl.question("Choose: (send message/schedule message/retreive messages/exit): ", async (choice) => {
     switch (choice.trim().toLowerCase()) {
       case "send message":
         rl.question("Enter message to send: ", async (msg) => {
-          await sendMessage(msg);
+          await SMessage(msg);
           showMenu();
         });
         break;
       case "schedule message":
         rl.question("Enter message to schedule: ", (msg) => {
           rl.question("After how many seconds do you want the message to be sent? ", async (seconds) => {
-            await scheduleMessage(msg, parseInt(seconds));
+            await SchMessage(msg, parseInt(seconds));
             showMenu();
           });
         });
         break;
       case "get messages":
-        await getMessages();
+        await RMessages();
         showMenu();
         break;
       case "exit":
